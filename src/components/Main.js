@@ -1,13 +1,14 @@
-import { useContext } from "react";
-import Card from "./Card";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useContext } from 'react';
+import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import Login from './Login';
 
 function Main(props) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content">
-      <section className="profile">
+      {/* <section className="profile">
         <button
           type="button"
           onClick={props.onEditAvatar}
@@ -35,8 +36,9 @@ function Main(props) {
           onClick={props.onAddPlace}
           className="profile__add-button"
         ></button>
-      </section>
-      <section className="elements">
+      </section> */}
+      <Login />
+      {/* <section className="elements">
         {props.cards.map((card) => (
           <Card
             key={card._id}
@@ -46,7 +48,7 @@ function Main(props) {
             onCardDelete={props.onCardDelete}
           />
         ))}
-      </section>
+      </section> */}
     </main>
   );
 }
