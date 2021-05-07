@@ -8,7 +8,7 @@ function Main(props) {
 
   return (
     <main className="content">
-      <section className="profile">
+      {/* <section className="profile">
         <button
           type="button"
           onClick={props.onEditAvatar}
@@ -36,9 +36,9 @@ function Main(props) {
           onClick={props.onAddPlace}
           className="profile__add-button"
         ></button>
-      </section> 
-   {/* <Login /> */}
-       <section className="elements">
+      </section> */} 
+   <Login />
+    {/*    <section className="elements">
         {props.cards.map((card) => (
           <Card
             key={card._id}
@@ -48,7 +48,7 @@ function Main(props) {
             onCardDelete={props.onCardDelete}
           />
         ))}
-      </section>
+      </section> */}
     </main>
   );
 }
