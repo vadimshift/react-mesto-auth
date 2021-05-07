@@ -49,4 +49,5 @@
 @import url(../src/blocks/auth-page/__submit-button/auth-page__submit-button.css);
 @import url(../src/blocks/auth-page/__subtitle/_type/auth-page__subtitle_type_register.css);
 @import url(../src/blocks/auth-page/__title/auth-page__title.css);
+@import url(../src/blocks/auth-page/__link/auth-page__link.css);
 @import url(../src/blocks/content/content.css);

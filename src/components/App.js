@@ -9,6 +9,7 @@ import ImagePopup from "./ImagePopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import Register from "./Register";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -154,7 +155,8 @@ function App() {
       <div className="page">
         <div className="page__container">
           <Header />
-          <Main
+          <Register />
+          {/* <Main
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
@@ -183,7 +185,7 @@ function App() {
             title="Вы уверены?"
             buttonTitle="Да"
           ></PopupWithForm>
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} /> */}
           <Footer />
         </div>
       </div>

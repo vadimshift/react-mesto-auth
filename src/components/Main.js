@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import Login from './Login';
+import Register from "./Register"
 
 function Main(props) {
   const currentUser = useContext(CurrentUserContext);
@@ -37,7 +38,8 @@ function Main(props) {
           className="profile__add-button"
         ></button>
       </section> */} 
-   <Login />
+   {/* <Login /> */}
+   <Register />
     {/*    <section className="elements">
         {props.cards.map((card) => (
           <Card

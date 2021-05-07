@@ -14,7 +14,7 @@ function Login() {
         </button>
         <p className="auth-page__subtitle_type_register">
           Уже зарегистрированы?{' '}
-          <a className="auth-page__register-link" href="#">
+          <a className="auth-page__link" href="#">
             Войти
           </a>
         </p>
