@@ -10,6 +10,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import Register from "./Register";
+import Login from "./Login";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -154,8 +155,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="page__container">
-          <Header />
           <Register />
+          {/* <Login /> */}
           {/* <Main
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
@@ -185,8 +186,7 @@ function App() {
             title="Вы уверены?"
             buttonTitle="Да"
           ></PopupWithForm>
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} /> */}
-          <Footer />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />  */}
         </div>
       </div>
     </CurrentUserContext.Provider>
