@@ -11,6 +11,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import Register from "./Register";
 import Login from "./Login";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -155,7 +156,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="page__container">
-          <Register />
+          <InfoTooltip />
           {/* <Login /> */}
           {/* <Main
             onEditProfile={handleEditProfileClick}
