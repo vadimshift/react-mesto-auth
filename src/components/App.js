@@ -1,196 +1,32 @@
-import React, { useState, useEffect } from "react";
-import api from "../utils/api";
-import Header from "./Header";
+import React, { useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Main from "./Main";
-import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
-import EditProfilePopup from "./EditProfilePopup";
-import ImagePopup from "./ImagePopup";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
 import Register from "./Register";
 import Login from "./Login";
-import InfoTooltip from "./InfoTooltip";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [cards, setCards] = useState([]);
-
-  const handleAddPlaceSubmit = (data) => {
-    api
-      .setNewCard(data)
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  };
-
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    const setLikeCard = () => {
-      api
-        .setLikeCard(card._id, !isLiked)
-        .then((newCard) => {
-          setCards((cards) =>
-            cards.map((c) => (c._id === card._id ? newCard : c))
-          );
-        })
-        .catch((err) => {
-          console.log(`Ошибка ${err}`);
-        });
-    };
-
-    const setDislikeCard = () => {
-      api
-        .delLikeCard(card._id, !isLiked)
-        .then((newCard) => {
-          setCards((cards) =>
-            cards.map((c) => (c._id === card._id ? newCard : c))
-          );
-        })
-        .catch((err) => {
-          console.log(`Ошибка ${err}`);
-        });
-    };
-
-    isLiked ? setDislikeCard() : setLikeCard();
-  }
-
-  function handleCardDelete(card) {
-    api
-      .delCard(card._id)
-      .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id));
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  }
-
-  useEffect(() => {
-    api
-      .getCards()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  }, []);
-
-  const handleUpdateAvatar = (data) => {
-    api
-      .setNewAvatar(data)
-      .then((data) => {
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  };
-
-  const handleUpdateUser = (data) => {
-    api
-      .setNewProfileInfo(data)
-      .then((data) => {
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  };
-
-  const [currentUser, setCurrentUser] = useState({});
-
-  useEffect(() => {
-    api
-      .getProfileInfo()
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  }, []);
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-
-  const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(true);
-  };
-
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-
-  const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(true);
-  };
-
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-
-  const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(true);
-  };
-
-  const closeAllPopups = () => {
-    setIsEditProfilePopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setSelectedCard({});
-  };
-
-  const [selectedCard, setSelectedCard] = useState({});
-
-  const handleCardClick = (card) => {
-    setSelectedCard(card);
-  };
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <div className="page__container">
-          <InfoTooltip />
-          {/* <Login /> */}
-          {/* <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+    <div className="page">
+      <div className="page__container">
+        <Switch>
+          <ProtectedRoute
+            path="/sign-up"
+            loggedIn={loggedIn}
+            component={Register}
           />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlaceSubmit}
-          />
-          <PopupWithForm
-            name="submit-form"
-            title="Вы уверены?"
-            buttonTitle="Да"
-          ></PopupWithForm>
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />  */}
-        </div>
+          <Route path="/sign-in">
+            <Login loggedIn={loggedIn} />
+          </Route>
+          <ProtectedRoute path="/main" loggedIn={loggedIn} component={Main} />
+          <Route>
+            {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in" />}
+          </Route>
+        </Switch>
       </div>
-    </CurrentUserContext.Provider>
+    </div>
   );
 }
 
