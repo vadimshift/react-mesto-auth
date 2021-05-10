@@ -9,7 +9,7 @@ function Main(props) {
 
   return (
     <>
-      <Header />
+      <Header buttonTitle={"Выйти"} userMail={"email@email.com"} />
       <main className="content">
         <section className="profile">
           <button

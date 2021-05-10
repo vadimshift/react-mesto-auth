@@ -1,12 +1,15 @@
 import logo from "../images/logo.svg";
 
-function Header() {
+function Header(props) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="Логотип проекта Место" />
-      <a className="header__link" href="#">
-        Войти
-      </a>
+      <p className="header__login-title">
+        {props.userMail}
+        <a className="header__link" href="#">
+          {props.buttonTitle}
+        </a>
+      </p>
     </header>
   );
 }

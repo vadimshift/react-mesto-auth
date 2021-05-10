@@ -4,7 +4,7 @@ import Footer from "./Footer";
 function Register() {
   return (
     <>
-      <Header />
+      <Header buttonTitle={"Войти"}/>
       <section className="auth-page">
         <h2 className="auth-page__title">Регистрация</h2>
         <form className="auth-page__form" noValidate>
