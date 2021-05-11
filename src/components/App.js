@@ -6,7 +6,7 @@ import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   return (
     <div className="page">
@@ -24,7 +24,7 @@ function App() {
           <Route>
             {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in" />}
           </Route>
-        </Switch>
+        </Switch>       
       </div>
     </div>
   );
