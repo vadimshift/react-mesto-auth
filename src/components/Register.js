@@ -1,29 +1,54 @@
-import Header from './Header';
-import Footer from './Footer';
-import { Link } from 'react-router-dom';
+import Header from "./Header";
+import Footer from "./Footer";
+import { Link, useHistory } from "react-router-dom";
+import * as apiAuth from "../utils/apiAuth";
+import { useState } from "react";
 
 function Register() {
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    apiAuth.register(email, password)
+    
+  }
+
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const hendleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const hendleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  
+
   return (
     <>
-      <Header buttonTitle={'Войти'} link={'sign-up'} />
+      <Header buttonTitle={"Войти"} link={'/login'} /* link={{path: 'sign-in'}} */ />
       <section className="auth-page">
         <h2 className="auth-page__title">Регистрация</h2>
-        <form className="auth-page__form" noValidate>
+        <form onSubmit={handleSubmit} className="auth-page__form" noValidate>
           <input
             type="email"
             className="auth-page__input"
             placeholder="Email"
+            onChange={hendleChangeEmail}
           ></input>
           <input
             className="auth-page__input"
             placeholder="Пароль"
             type="password"
+            onChange={hendleChangePassword}
           ></input>
-          <button className="auth-page__submit-button" type="button">
+          <button className="auth-page__submit-button" type="submit">
             Зарегистрироваться
           </button>
           <p className="auth-page__subtitle_type_register">
-            Уже зарегистрированы?{' '}
+            Уже зарегистрированы?{" "}
             <Link to="login" className="auth-page__link">
               Войти
             </Link>
