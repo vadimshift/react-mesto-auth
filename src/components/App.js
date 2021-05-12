@@ -20,7 +20,7 @@ function App() {
           </Route>
           <ProtectedRoute path="/main" loggedIn={loggedIn} component={Main} />
           <Route>
-            {loggedIn ? <Redirect to="*" /> : <Redirect to="/sign-in" />}
+            {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in" />}
           </Route>
         </Switch>
       </div>
