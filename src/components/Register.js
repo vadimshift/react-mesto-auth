@@ -1,50 +1,59 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link, useHistory } from "react-router-dom";
-import * as apiAuth from "../utils/apiAuth";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Register() {
+function Register({onRegister}) {
+  const [registerData, setRegisterData] = useState({
+    email: "",
+    password: "",
+  });
 
-  function handleSubmit(e) {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterData({
+      ...registerData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    apiAuth.register(email, password).then((res) => console.log(res))
-    
-  }
+    onRegister(registerData)
 
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const hendleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const hendleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  
+    /* apiAuth.register(registerData).then((res) => {const data = res; console.log(data.data._id)}); */
+  } 
 
   return (
     <>
       <Header>
-        <Link to='/sign-in' className="header__link">Войти</Link>
+        <Link to="/sign-in" className="header__link">
+          Войти
+        </Link>
       </Header>
       <section className="auth-page">
         <h2 className="auth-page__title">Регистрация</h2>
-        <form onSubmit={handleSubmit} className="auth-page__form" noValidate>
+        <form onSubmit={handleSubmit} className="auth-page__form" >
           <input
+            id="email"
+            name="email"
             type="email"
+            value={registerData.email}
+            required
+            onChange={handleChange}
             className="auth-page__input"
             placeholder="Email"
-            onChange={hendleChangeEmail}
           ></input>
           <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            value={registerData.password}
+            required
+            onChange={handleChange}
             className="auth-page__input"
             placeholder="Пароль"
-            type="password"
-            onChange={hendleChangePassword}
           ></input>
           <button className="auth-page__submit-button" type="submit">
             Зарегистрироваться
