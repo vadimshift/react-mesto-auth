@@ -8,7 +8,7 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    apiAuth.register(email, password)
+    apiAuth.register(email, password).then((res) => console.log(res))
     
   }
 
@@ -28,7 +28,9 @@ function Register() {
 
   return (
     <>
-      <Header buttonTitle={"Войти"} link={'/login'} /* link={{path: 'sign-in'}} */ />
+      <Header>
+        <Link to='/sign-in' className="header__link">Войти</Link>
+      </Header>
       <section className="auth-page">
         <h2 className="auth-page__title">Регистрация</h2>
         <form onSubmit={handleSubmit} className="auth-page__form" noValidate>
@@ -49,7 +51,7 @@ function Register() {
           </button>
           <p className="auth-page__subtitle_type_register">
             Уже зарегистрированы?{" "}
-            <Link to="login" className="auth-page__link">
+            <Link to="/sign-in" className="auth-page__link">
               Войти
             </Link>
           </p>

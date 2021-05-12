@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import Card from "./Card";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import Header from "./Header";
-import Footer from "./Footer";
-import api from "../utils/api";
-import PopupWithForm from "./PopupWithForm";
-import EditProfilePopup from "./EditProfilePopup";
-import ImagePopup from "./ImagePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
+import { useState, useEffect } from 'react';
+import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import Header from './Header';
+import Footer from './Footer';
+import api from '../utils/api';
+import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
+import ImagePopup from './ImagePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import { Link } from 'react-router-dom';
 
 function Main() {
   const [currentUser, setCurrentUser] = useState({});
@@ -149,10 +150,20 @@ function Main() {
     setIsEditAvatarPopupOpen(true);
   };
 
+  //Надо дописать фунцию и стиль для кнопки
+  const click = () => {
+    console.log('выйти')
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header buttonTitle={"Выйти"} userMail={"email@email.com"} />
+        <Header userMail={'email@email.com'}>
+          <button onClick={click} className="header__link">Выйти</button> 
+          {/* <Link to="/sign-in" className="header__link" onClick={console.log('Выйти')}>
+            Выйти
+          </Link>  */}
+        </Header>
         <main className="content">
           <section className="profile">
             <button
