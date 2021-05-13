@@ -7,7 +7,7 @@ import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const history = useHistory();
 

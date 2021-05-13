@@ -159,7 +159,7 @@ function Main() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header userMail={'email@email.com'}>
-          <button onClick={click} className="header__link">Выйти</button> 
+          <button onClick={click} className="header__logout-button">Выйти</button> 
           {/* <Link to="/sign-in" className="header__link" onClick={console.log('Выйти')}>
             Выйти
           </Link>  */}
