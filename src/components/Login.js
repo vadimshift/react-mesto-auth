@@ -42,7 +42,7 @@ function Login({ onLogin }) {
             required
             name="email"
             type="email"
-            value={loginData.username}
+            value={loginData.email}
             onChange={handleChange}
             className="auth-page__input"
             placeholder="Email"

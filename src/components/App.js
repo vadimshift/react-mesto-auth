@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import * as apiAuth from "../utils/apiAuth";
 import Main from "./Main";
@@ -7,7 +7,11 @@ import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [userEmail, setUserEmail] = useState({
+    email: "",
+  });
 
   const history = useHistory();
 
@@ -18,14 +22,38 @@ function App() {
   };
 
   const onLogin = (data) => {
-    return apiAuth
-      .authorize(data)
-      .then((data) => {
-        console.log(data.token)
-        //setUserInfo({ username, email });
-        setLoggedIn(true);
-        localStorage.setItem('jwt', data.token);
-      });
+    return apiAuth.authorization(data).then((data) => {
+      setLoggedIn(true);
+      localStorage.setItem("token", data.token);
+    });
+  };
+
+  const checkToken = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    apiAuth.getContent(token).then((data) => {
+      setUserEmail(data.data.email);
+      setLoggedIn(true);
+    });
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      history.push("/main");
+    }
+  }, [loggedIn]);
+
+  const onLogout = () => {
+    setLoggedIn(false);
+    setUserEmail("");
+    localStorage.removeItem("token");
+    history.push("/sign-in");
   };
 
   return (
@@ -36,9 +64,15 @@ function App() {
             <Register loggedIn={loggedIn} onRegister={onRegister} />
           </Route>
           <Route path="/sign-in">
-            <Login loggedIn={loggedIn} onLogin={onLogin}/>
+            <Login loggedIn={loggedIn} onLogin={onLogin} />
           </Route>
-          <ProtectedRoute path="/main" loggedIn={loggedIn} component={Main} />
+          <ProtectedRoute
+            path="/main"
+            loggedIn={loggedIn}
+            onLogout={onLogout}
+            userEmail={userEmail}
+            component={Main}
+          />
           <Route>
             {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in" />}
           </Route>
