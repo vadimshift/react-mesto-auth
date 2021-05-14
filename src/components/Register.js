@@ -2,6 +2,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import InfoTooltip from './InfoTooltip';
 
 function Register({onRegister}) {
   const [registerData, setRegisterData] = useState({
@@ -20,9 +21,7 @@ function Register({onRegister}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onRegister(registerData)
-
-    /* apiAuth.register(registerData).then((res) => {const data = res; console.log(data.data._id)}); */
-  } 
+  }
 
   return (
     <>
@@ -66,6 +65,7 @@ function Register({onRegister}) {
           </p>
         </form>
       </section>
+      <InfoTooltip/>
       <Footer />
     </>
   );

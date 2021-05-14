@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import * as apiAuth from "../utils/apiAuth";
-import Main from "./Main";
-import Register from "./Register";
-import Login from "./Login";
-import ProtectedRoute from "./ProtectedRoute";
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import * as apiAuth from '../utils/apiAuth';
+import Main from './Main';
+import Register from './Register';
+import Login from './Login';
+import ProtectedRoute from './ProtectedRoute';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [userEmail, setUserEmail] = useState({
-    email: "",
+    email: '',
   });
 
   const history = useHistory();
 
   const onRegister = (data) => {
-    return apiAuth.register(data).then(() => {
-      history.push("/sign-in");
+    return apiAuth.register(data).then((res) => {
+      res ? alert('zbs') : alert('hui');
+      history.push('/sign-in');
     });
   };
 
   const onLogin = (data) => {
     return apiAuth.authorization(data).then((data) => {
       setLoggedIn(true);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem('token', data.token);
     });
   };
 
   const checkToken = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) {
       return;
     }
@@ -45,15 +47,15 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      history.push("/main");
+      history.push('/main');
     }
   }, [loggedIn]);
 
   const onLogout = () => {
     setLoggedIn(false);
-    setUserEmail("");
-    localStorage.removeItem("token");
-    history.push("/sign-in");
+    setUserEmail('');
+    localStorage.removeItem('token');
+    history.push('/sign-in');
   };
 
   return (
