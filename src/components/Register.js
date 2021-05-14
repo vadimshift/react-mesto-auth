@@ -1,10 +1,8 @@
 import Header from "./Header";
-import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import InfoTooltip from './InfoTooltip';
 
-function Register({onRegister}) {
+function Register({ onRegister }) {
   const [registerData, setRegisterData] = useState({
     email: "",
     password: "",
@@ -20,8 +18,8 @@ function Register({onRegister}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister(registerData)
-  }
+    onRegister(registerData);
+  };
 
   return (
     <>
@@ -32,7 +30,7 @@ function Register({onRegister}) {
       </Header>
       <section className="auth-page">
         <h2 className="auth-page__title">Регистрация</h2>
-        <form onSubmit={handleSubmit} className="auth-page__form" >
+        <form onSubmit={handleSubmit} className="auth-page__form">
           <input
             id="email"
             name="email"
@@ -65,8 +63,7 @@ function Register({onRegister}) {
           </p>
         </form>
       </section>
-      <InfoTooltip/>
-      <Footer />
+      {/* <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeInfoTooltipPopup} /> */}
     </>
   );
 }

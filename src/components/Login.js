@@ -1,5 +1,4 @@
 import Header from "./Header";
-import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -19,12 +18,7 @@ function Login({ onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* if (!loginData.username || !loginData.password) {
-      return;
-    } */
-
     onLogin(loginData);
-    /* .catch(err => setMessage(err.message || 'Что-то пошло не так')); */
   };
 
   return (
@@ -63,7 +57,6 @@ function Login({ onLogin }) {
           </button>
         </form>
       </section>
-      <Footer />
     </>
   );
 }
