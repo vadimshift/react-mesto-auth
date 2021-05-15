@@ -34,14 +34,16 @@ function App() {
       .catch(() => {
         setIsInfoTooltipOpen(true);
         setRigisterResult(false);
-      });
+      })
+      .catch((err) => console.log(`Ошибка ${err}`));
   };
 
   const onLogin = (data) => {
     return apiAuth.authorization(data).then((data) => {
       setLoggedIn(true);
       localStorage.setItem("token", data.token);
-    });
+    })
+     .catch((err) => console.log(`Ошибка ${err}`));
   };
 
   const checkToken = () => {
@@ -52,7 +54,8 @@ function App() {
     apiAuth.getContent(token).then((data) => {
       setUserEmail(data.data.email);
       setLoggedIn(true);
-    });
+    })
+    .catch((err) => console.log(`Ошибка ${err}`));
   };
 
   useEffect(() => {

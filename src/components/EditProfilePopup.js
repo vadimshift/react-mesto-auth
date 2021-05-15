@@ -3,6 +3,9 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
 function EditProfilePopup(props) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   function handleSubmit(e) {
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
@@ -12,14 +15,11 @@ function EditProfilePopup(props) {
     });
   }
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-
-  const hendleChangeName = (e) => {
+  const handleChangeName = (e) => {
     setName(e.target.value);
   };
 
-  const hendleChangeDescription = (e) => {
+  const handleChangeDescription = (e) => {
     setDescription(e.target.value);
   };
 
@@ -28,7 +28,7 @@ function EditProfilePopup(props) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   return (
     <PopupWithForm
@@ -49,7 +49,7 @@ function EditProfilePopup(props) {
         placeholder="Имя"
         className="popup__enter popup__enter_type_name"
         value={name || ""}
-        onChange={hendleChangeName}
+        onChange={handleChangeName}
       />
       <span className="enterNameProfile-error popup__error-message"></span>
       <input
@@ -62,7 +62,7 @@ function EditProfilePopup(props) {
         placeholder="О себе"
         className="popup__enter popup__enter_type_about"
         value={description || ""}
-        onChange={hendleChangeDescription}
+        onChange={handleChangeDescription}
       />
       <span className="popup__error-message enterAboutProfile-error"></span>
     </PopupWithForm>

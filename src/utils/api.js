@@ -19,17 +19,13 @@ class Api {
   getCards() {
     return fetch(this._cardsUrl, {
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   getProfileInfo() {
     return fetch(this._userUrl, {
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   setNewProfileInfo(data) {
@@ -40,9 +36,7 @@ class Api {
         name: data.name,
         about: data.about,
       }),
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   setNewCard({ placeName, placeLink }) {
@@ -53,36 +47,28 @@ class Api {
         name: placeName,
         link: placeLink,
       }),
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   delCard(id) {
     return fetch(`${this._cardsUrl}/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   setLikeCard(id) {
     return fetch(`${this._cardsUrlLike}/${id}`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   delLikeCard(id) {
     return fetch(`${this._cardsUrlLike}/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 
   setNewAvatar(data) {
@@ -92,9 +78,7 @@ class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    })
-      .then((res) => this._parseResponse(res))
-      .catch((err) => Promise.reject(err));
+    }).then((res) => this._parseResponse(res));
   }
 }
 

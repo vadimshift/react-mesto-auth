@@ -17,9 +17,7 @@ export const register = ({ email, password }) => {
     headers,
     method: "POST",
     body: JSON.stringify({ email, password }),
-  })
-    .then((res) => checkResponse(res))
-    .catch((err) => Promise.reject(err));
+  }).then((res) => checkResponse(res));
 };
 
 export const authorization = ({ password, email }) => {

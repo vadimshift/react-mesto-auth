@@ -2,6 +2,9 @@ import { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
+  const [placeName, setPlaceName] = useState("");
+  const [placeLink, setPlaceLink] = useState("");
+
   function handleSubmit(e) {
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
@@ -10,9 +13,6 @@ function AddPlacePopup(props) {
       placeLink,
     });
   }
-
-  const [placeName, setPlaceName] = useState("");
-  const [placeLink, setPlaceLink] = useState("");
 
   const hendleChangePlaceName = (e) => {
     setPlaceName(e.target.value);
