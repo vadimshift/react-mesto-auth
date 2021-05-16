@@ -5,7 +5,6 @@ function Header(props) {
     <header className="header">
       <img className="header__logo" src={logo} alt="Логотип проекта Место" />
       <p className="header__login-title">
-        {props.userEmail}
         {props.children}
       </p>
     </header>
