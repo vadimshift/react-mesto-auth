@@ -28,7 +28,7 @@ function Register({ onRegister }) {
           Войти
         </Link>
       </Header>
-      <section className="auth-page">
+      <section className="content">
         <h2 className="auth-page__title">Регистрация</h2>
         <form onSubmit={handleSubmit} className="auth-page__form">
           <input

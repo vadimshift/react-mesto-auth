@@ -28,7 +28,7 @@ function Login({ onLogin }) {
           Регистрация
         </Link>
       </Header>
-      <section className="auth-page">
+      <section className="content">
         <h2 className="auth-page__title">Вход</h2>
         <form className="auth-page__form" onSubmit={handleSubmit}>
           <input
