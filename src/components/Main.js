@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import Card from "./Card";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import Header from "./Header";
+import { useContext } from 'react';
+import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import Header from './Header';
 
 function Main({
   cards,
@@ -18,56 +18,54 @@ function Main({
 
   return (
     <>
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header>
-          {userEmail}
-          <button onClick={handleLogout} className="header__logout-button">
-            Выйти
+      <Header>
+        <span>{userEmail}</span>
+        <button onClick={handleLogout} className="header__logout-button">
+          Выйти
+        </button>
+      </Header>
+      <main className="content">
+        <section className="profile">
+          <button
+            type="button"
+            onClick={handleEditAvatarClick}
+            className="profile__avatar-edit-button"
+          >
+            <img
+              className="profile__avatar"
+              src={currentUser.avatar}
+              alt="фотография профиля"
+            />
           </button>
-        </Header>
-        <main className="content">
-          <section className="profile">
-            <button
-              type="button"
-              onClick={handleEditAvatarClick}
-              className="profile__avatar-edit-button"
-            >
-              <img
-                className="profile__avatar"
-                src={currentUser.avatar}
-                alt="фотография профиля"
-              />
-            </button>
-            <div className="profile__info-container">
-              <div className="profile__info">
-                <h1 className="profile__title">{currentUser.name}</h1>
-                <button
-                  type="button"
-                  onClick={handleEditProfileClick}
-                  className="profile__edit-button"
-                ></button>
-              </div>
-              <p className="profile__subtitle">{currentUser.about}</p>
+          <div className="profile__info-container">
+            <div className="profile__info">
+              <h1 className="profile__title">{currentUser.name}</h1>
+              <button
+                type="button"
+                onClick={handleEditProfileClick}
+                className="profile__edit-button"
+              ></button>
             </div>
-            <button
-              type="button"
-              onClick={handleAddPlaceClick}
-              className="profile__add-button"
-            ></button>
-          </section>
-          <section className="elements">
-            {cards.map((card) => (
-              <Card
-                key={card._id}
-                card={card}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-              />
-            ))}
-          </section>
-        </main>
-      </CurrentUserContext.Provider>
+            <p className="profile__subtitle">{currentUser.about}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleAddPlaceClick}
+            className="profile__add-button"
+          ></button>
+        </section>
+        <section className="elements">
+          {cards.map((card) => (
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />
+          ))}
+        </section>
+      </main>
     </>
   );
 }
